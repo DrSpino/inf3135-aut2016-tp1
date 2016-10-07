@@ -26,17 +26,20 @@ int main(int argc, char *argv[]) {
 void test_argc(int argc){
     if (argc < 4){
         printf("Nombre d'arguments invalides: il en faut 3\n");
+        exit(1);
     }
 }
 
 void test_single_args(char *str1, char *str2){
     if (strcmp(str1,str2) == 0){
         printf("Les codes doivent etre distincts\n");
+        exit(1);
     }
 }
 void test_args_len(char *str){
     if (strlen(str) != 1){
         printf("Code %s invalide: il doit etre un caractere unique\n",str);
+         exit(1);
     }
 }
 
