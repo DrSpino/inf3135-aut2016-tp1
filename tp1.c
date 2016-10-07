@@ -16,6 +16,7 @@ void test_argc(int argc);
 void test_single_args(char *str1, char *str2);
 void test_args_len(char *str);
 void test_width(char *str);
+void slice_string(char **array_str,char *str);
 
 int main(int argc, char *argv[]) {
     test_argc(argc);
@@ -24,6 +25,8 @@ int main(int argc, char *argv[]) {
     test_single_args(argv[1],argv[2]);
 
     test_width(argv[argc-1]);
+    char *array[strlen(argv[argc-1]-1)];
+    slice_string(array, argv[argc-1]);
 
 }
 
@@ -49,9 +52,21 @@ void test_args_len(char *str){
 }
 
 void test_width(char *str){
-    if (strlen(str) > 20){
+    if (strlen(str) > LARGEUR_MAX){
         printf("Largeur invalide: le nombre de hauteurs doit etre entre "
                 "1 et 20\n");
         exit(1);
+    }
+}
+
+void slice_string(char **array_str,char *str){
+    const char s[2] = ",";
+    char *token;
+    int index = 0;
+
+    token = strtok(str,s);
+    while (token != NULL){
+        array_str[index++] = token;
+        token = strtok(NULL,s);
     }
 }
