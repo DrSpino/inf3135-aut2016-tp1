@@ -14,9 +14,12 @@
 
 void test_argc(int argc);
 void test_single_args(char *str1, char *str2);
+void test_args_len(char *str);
 
 int main(int argc, char *argv[]) {
     test_argc(argc);
+    test_args_len(argv[1]);
+    test_args_len(argv[2]);
     test_single_args(argv[1],argv[2]);
 }
 
@@ -29,6 +32,11 @@ void test_argc(int argc){
 void test_single_args(char *str1, char *str2){
     if (strcmp(str1,str2) == 0){
         printf("Les codes doivent etre distincts\n");
+    }
+}
+void test_args_len(char *str){
+    if (strlen(str) != 1){
+        printf("Code %s invalide: il doit etre un caractere unique\n",str);
     }
 }
 
