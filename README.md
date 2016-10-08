@@ -30,11 +30,12 @@ Istvan Szalai (SZAI29079604)
 ## Contenu du projet
 
 * Makfile -> Construction du projet.
-* .gitgignore -> Permet d'ignorer les fichier non destiner a etre versioner. 
-* LICENCE -> Notice de la Licence sous laquelle le projet est distribuer.
-* README.md -> information generale sur le projet ainsi que les instruction pour l'utiliser.
-* .gitlab-ci.yml -> contient les specification pour l'integratiosn contineu sur gitlab.com
-* tp1.c -> contient le code source du projet.
+* .gitgignore -> Permet d'ignorer les fichiers non destinés a être versionés. 
+* LICENCE -> Notice de la Licence sous laquelle le projet est distribué.
+* README.md -> Informations générale sur le projet ainsi que les instructions pour l'utiliser.
+* .gitlab-ci.yml -> Contient les specifications pour l'integrations continue sur gitlab.com
+* tp1.c -> Contient le code source du projet.
+* test.bats -> Tests du projet.
 
 ## Références
 
