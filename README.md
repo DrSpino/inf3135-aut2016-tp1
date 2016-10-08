@@ -43,5 +43,4 @@ Istvan Szalai (SZAI29079604)
 
 ## Statut
 
-Indiquer si le projet est complété et sans bogue. Sinon, expliquez ce qui
-manque ou ce qui ne fonctionne pas.
+**FINI** 
