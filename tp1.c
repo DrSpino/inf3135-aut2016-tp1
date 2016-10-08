@@ -36,6 +36,7 @@ void isWaterAndDirtDifferent(char *dirt, char *water);
 void isSingleArg(char *s);
 void isArrayHeightsValid(unsigned int  width);
 int toString(char []);
+void addWater(Mountain* mountain, ArrayHeights* array_heights, char water, char dirt);
 int getArrayHeightsMax(ArrayHeights array_heights);
 void createArrayHeights(ArrayHeights* array_heights,char *str);
 void createMountain(Mountain* mountain, ArrayHeights array_heights, char dirt);
@@ -59,6 +60,7 @@ int main(int argc, char *argv[]) {
     Mountain mountain;
     Mountain* p_mountain = &mountain;
     createMountain(p_mountain,array_heights, dirt);
+    addWater(p_mountain, p_array_heights, water, dirt);
     showMountain(mountain);
 }
 
@@ -85,6 +87,7 @@ void isSingleArg(char *s){
 void isArrayHeightsValid(unsigned int width){
     if ( width > WIDTH_MAX){
         printf("Largeur invalide: le nombre de hauteurs doit etre entre 1 et %d\n",WIDTH_MAX);
+        exit(1);
     }
 }
 
@@ -147,8 +150,6 @@ void createArrayHeights(ArrayHeights* array_heights,char *str){
 void createMountain(Mountain* mountain, ArrayHeights array_heights, char dirt){
     mountain->width = array_heights.width;
     mountain->height = getArrayHeightsMax(array_heights);
-    printf("height: %d\n",mountain->height);
-    printf("width: %d\n\n",mountain->width);
     int top = getArrayHeightsMax(array_heights);
     unsigned int i,j;
     for (i=0; i< mountain->height; i++){
@@ -170,5 +171,25 @@ void showMountain(Mountain mountain){
         printf("%c",mountain.content[i][j]);
         }
         printf("\n");
+    }
+}
+
+void addWater(Mountain* mountain, ArrayHeights* array_heights,char water, char dirt){
+    int start = -1, end = -1;
+    unsigned int i, j;
+    for (i=0; i< mountain->height; i++){
+        for (j=0; j < mountain->width; j++) {
+            if (mountain->content[i][j] == dirt && start == -1){
+                start = j;
+            }else if (mountain->content[i][j] == dirt){
+                end = j;
+                start++;
+                for(start;start<end;start++){
+                    mountain->content[i][start] = water;
+                }
+                start = end;
+            }
+        }
+        start = -1; end =-1;
     }
 }
