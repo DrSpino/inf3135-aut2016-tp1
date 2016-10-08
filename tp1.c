@@ -1,3 +1,18 @@
+// ----------------------------------------------------------------------//
+// Copyright [2016] [istvan Szalai szalai972@gmail.com]
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//----------------------------------------------------------------------//
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -16,11 +31,13 @@
 //    DATA STRUCTURES    //
 // --------------------- //
 
+/*Structure for easier manipulation on the last arguments see@ argv[argc-1]*/
 typedef struct ArrayHeights {
     unsigned int width;
     int content[WIDTH_MAX + 1];
 } ArrayHeights;
 
+/*Structure for mountain creation, manipulation and display*/
 typedef struct Mountain {
     unsigned int height;
     unsigned int width;
@@ -31,15 +48,89 @@ typedef struct Mountain {
 // Prototypes //
 // ---------- //
 
+/**
+* display an error message and close the program if the 
+* number of arguments passed to main is different of 3;    
+*
+* @param    int argc [number of arguments passed to main dunction] 
+*/
 void checkArgc(int argc);
+
+/**
+* display an error message and close the program if the 
+* the first and second argument passed to the main function
+* are the same.    
+*
+* @param    char *dirt [char pointer on first main argument]
+* @param    char *water [char pointer on second main argument]
+*/
 void isWaterAndDirtDifferent(char *dirt, char *water);
+
+/**
+* display an error message and close the program if the @param
+* has a lenght > 1.  
+*
+* @param    char *s [char pointer]
+*/
 void isSingleArg(char *s);
+
+/**
+* display an error message and close the program if 
+* the lenght of the param is > WIDTH_MAX.    
+*
+* @param    int argc [length of ] 
+* @see      WIDTH_MAX
+*/
 void isArrayHeightsValid(unsigned int  width);
-int toString(char []);
+
+/**
+* Convert as much as possible an array of char to the associated integer.
+*
+* @param    char a[] [an array of char]
+* @return   return the integer equivalent of @param 
+*/
+int toString(char a[]);
+
+/**
+* Add water according to the specs to a Mountain struct.   
+*
+* @param    Mountain* mountain [pointer of a mountain struct]
+* @param    ArrayHeights* array_heights [pointer of an ArrayHeights struc]
+* @param    char water  [char that is used to represent water]
+* @param    char dirt   [char that is used to represent dirt]
+*/
 void addWater(Mountain* mountain, ArrayHeights* array_heights, char water, char dirt);
+
+/**
+* display an error message and close the program.    
+*
+* @param   ArrayHeights array_heights [copy of an ArrayHeights struct]  
+* @return  [return the max value of in ArrayHeights.content]
+*/
 int getArrayHeightsMax(ArrayHeights array_heights);
+
+/**
+* display an error message and close the program.    
+*
+* @param  int argc [number of arguments passed to main dunction]
+* @param  
+* @return      the image at the specified URL
+*/
 void createArrayHeights(ArrayHeights* array_heights,char *str);
+
+/**
+* display an error message and close the program.    
+*
+* @param  int argc [number of arguments passed to main dunction]
+* @param  
+*/
 void createMountain(Mountain* mountain, ArrayHeights array_heights, char dirt);
+
+/**
+* display mountain.content and close teh program.    
+*
+* @param  Mountain mountain [a copy of a Mountain structure]
+*/
 void showMountain(Mountain mountain);
 
 int main(int argc, char *argv[]) {
