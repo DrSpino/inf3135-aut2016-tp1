@@ -34,9 +34,9 @@ typedef struct Mountain {
 void checkArgc(int argc);
 void isWaterAndDirtDifferent(char *dirt, char *water);
 void isSingleArg(char *s);
-void isArrayHeightsValid(ArrayHeights array_heights);
+void isArrayHeightsValid(unsigned int  width);
 int toString(char []);
-void createArrayHeights(ArrayHeights array_heights,char *str);
+void createArrayHeights(ArrayHeights* array_heights,char *str);
 
 int main(int argc, char *argv[]) {
     checkArgc(argc);
@@ -45,9 +45,10 @@ int main(int argc, char *argv[]) {
     isSingleArg(argv[2]);
 
     ArrayHeights array_heights;
+    ArrayHeights* p_array_heights = &array_heights;
 
-    createArrayHeights(array_heights, argv[argc-1]);
-    //isArrayHeightsValid(array_heights);
+    createArrayHeights(p_array_heights, argv[argc-1]);
+    isArrayHeightsValid(array_heights.width);
 }
 
 void checkArgc(int argc){
@@ -70,11 +71,10 @@ void isSingleArg(char *s){
         exit(1);
     }
 }
-void isArrayHeightsValid(ArrayHeights array_heights){
-    unsigned int i;
-    for (i = 0; i < array_heights.width; i++){
-        printf("%d\n",array_heights.content[i]);
-        }
+void isArrayHeightsValid(unsigned int width){
+    if ( width > WIDTH_MAX){
+        printf("Largeur invalide: le nombre de hauteurs doit etre entre 1 et %d\n",WIDTH_MAX);
+    }
 }
 
 int toString(char a[]) {
@@ -105,10 +105,10 @@ int toString(char a[]) {
 }
 
 
-void createArrayHeights(ArrayHeights array_heights,char *str){
+void createArrayHeights(ArrayHeights* array_heights,char *str){
     const char s[2] = ",";
     char *token;
-    int index = 0;
+    unsigned int index = 0;
 
     token = strtok(str,s);
     while (token != NULL){
@@ -116,10 +116,9 @@ void createArrayHeights(ArrayHeights array_heights,char *str){
             printf("Hauteur invalide: la hauteur doit etre un nombre entre 0 et %d\n",HEIGHT_MAX);\
             exit(1);
         }
-        array_heights.content[index] = toString(token);
-        printf("%d\n",array_heights.content[index]);
+        array_heights->content[index] = toString(token);
         index++;
         token = strtok(NULL,s);
     }
-    array_heights.width = index;
+    array_heights->width = index;
 }
