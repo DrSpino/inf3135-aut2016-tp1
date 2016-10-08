@@ -22,8 +22,8 @@ typedef struct ArrayHeights {
 } ArrayHeights;
 
 typedef struct Mountain {
-    unsigned int HEIGHT;
-    unsigned int WIDTH;
+    unsigned int height;
+    unsigned int width;
     char content[WIDTH_MAX][HEIGHT_MAX];
 } Mountain;
 
@@ -36,7 +36,10 @@ void isWaterAndDirtDifferent(char *dirt, char *water);
 void isSingleArg(char *s);
 void isArrayHeightsValid(unsigned int  width);
 int toString(char []);
+int getArrayHeightsMax(ArrayHeights array_heights);
 void createArrayHeights(ArrayHeights* array_heights,char *str);
+void createMountain(Mountain* mountain, ArrayHeights array_heights, char dirt);
+void showMountain(Mountain mountain);
 
 int main(int argc, char *argv[]) {
     checkArgc(argc);
@@ -46,9 +49,17 @@ int main(int argc, char *argv[]) {
 
     ArrayHeights array_heights;
     ArrayHeights* p_array_heights = &array_heights;
-
     createArrayHeights(p_array_heights, argv[argc-1]);
+
     isArrayHeightsValid(array_heights.width);
+
+    char dirt = argv[1][0];
+    char water = argv[2][0];
+
+    Mountain mountain;
+    Mountain* p_mountain = &mountain;
+    createMountain(p_mountain,array_heights, dirt);
+    showMountain(mountain);
 }
 
 void checkArgc(int argc){
@@ -104,6 +115,16 @@ int toString(char a[]) {
   return n;
 }
 
+int getArrayHeightsMax(ArrayHeights array_heights){
+    unsigned int i;
+    int max = array_heights.content[0];
+    for (i = 1; i < array_heights.width; i++){
+        if (max < array_heights.content[i]){
+            max = array_heights.content[i];
+        }
+    }
+    return max;
+}
 
 void createArrayHeights(ArrayHeights* array_heights,char *str){
     const char s[2] = ",";
@@ -121,4 +142,33 @@ void createArrayHeights(ArrayHeights* array_heights,char *str){
         token = strtok(NULL,s);
     }
     array_heights->width = index;
+}
+
+void createMountain(Mountain* mountain, ArrayHeights array_heights, char dirt){
+    mountain->width = array_heights.width;
+    mountain->height = getArrayHeightsMax(array_heights);
+    printf("height: %d\n",mountain->height);
+    printf("width: %d\n\n",mountain->width);
+    int top = getArrayHeightsMax(array_heights);
+    unsigned int i,j;
+    for (i=0; i< mountain->height; i++){
+        for (j=0; j < mountain->width; j++) {
+            if (array_heights.content[j] >= top){
+            mountain->content[i][j] = dirt;
+            }else{
+            mountain->content[i][j] = EMPTY_CHAR;
+            }
+        }
+        top--;
+    }
+}
+
+void showMountain(Mountain mountain){
+    unsigned int i,j;
+    for (i = 0; i < mountain.height; i++) {
+        for (j = 0; j < mountain.width; j++) {
+        printf("%c",mountain.content[i][j]);
+        }
+        printf("\n");
+    }
 }
