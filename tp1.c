@@ -87,6 +87,7 @@ void isSingleArg(char *s){
 void isArrayHeightsValid(unsigned int width){
     if ( width > WIDTH_MAX){
         printf("Largeur invalide: le nombre de hauteurs doit etre entre 1 et %d\n",WIDTH_MAX);
+        exit(1);
     }
 }
 
