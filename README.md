@@ -23,7 +23,7 @@ Istvan Szalai (SZAI29079604)
             -XXXXEXXEXX
             XXXXXXXXXXX`
 
-### cas 1:
+### cas 2:
 * Entrée : `./tp1 X 1,2,1`
 * Sortie : `Nombre d'arguments invalides: il en faut 3`
 
